@@ -67,7 +67,7 @@ app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5100;
 
-try {
+/* try {
     await mongoose.connect(process.env.MONGO_URL);
     app.listen(port, () => {
         console.log(`server running on PORT ${port}...`);
@@ -75,4 +75,23 @@ try {
 } catch (error) {
     console.log(error);
     process.exit(1);
-}
+} */
+
+//////////   Cyclic deployement experiments (For MongoDB)   //////////
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URL);
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+};
+
+//Connect to the database before listening
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log(`server running on PORT ${port}...`);
+    });
+});
