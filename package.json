@@ -2,7 +2,6 @@
   "name": "mern-interview-tracker",
   "version": "1.0.0",
   "description": "[Jobify](https://jobify.live/)",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "setup-project": "npm i && cd client && npm i",
